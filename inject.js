@@ -3,36 +3,45 @@
   const div = document.createElement("div");
   div.setAttribute("class", "opacity-layer");
 
-  // div.onmousedown = function (event) {
-  //   let shiftX = event.clientX - div.getBoundingClientRect().left;
-  //   let shiftY = event.clientY - div.getBoundingClientRect().top;
+  div.onmousedown = function (event) {
+    if (event.target.nodeName === "INPUT") return;
+    let shiftX = event.clientX - div.getBoundingClientRect().left;
+    let shiftY = event.clientY - div.getBoundingClientRect().top;
 
-  //   moveAt(event.pageX, event.pageY);
+    moveAt(event.pageX, event.pageY);
 
-  //   // moves the div at (pageX, pageY) coordinates
-  //   // taking initial shifts into account
-  //   function moveAt(pageX, pageY) {
-  //     div.style.left = pageX - shiftX + "px";
-  //     div.style.top = pageY - shiftY + "px";
-  //   }
+    // moves the div at (pageX, pageY) coordinates
+    // taking initial shifts into account
+    function moveAt(pageX, pageY) {
+      div.style.left = pageX - shiftX + "px";
+      div.style.top = pageY - shiftY + "px";
+    }
 
-  //   function onMouseMove(event) {
-  //     moveAt(event.pageX, event.pageY);
-  //   }
+    function onMouseMove(event) {
+      moveAt(event.pageX, event.pageY);
+    }
 
-  //   // move the div on mousemove
-  //   document.addEventListener("mousemove", onMouseMove);
+    function onKeyDown(event) {
+      if (event.key === "Escape") {
+        document.removeEventListener("mousemove", onMouseMove);
+        div.onmouseup = null;
+      }
+    }
 
-  //   // drop the div, remove unneeded handlers
-  //   div.onmouseup = function () {
-  //     document.removeEventListener("mousemove", onMouseMove);
-  //     div.onmouseup = null;
-  //   };
-  // };
+    // move the div on mousemove
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("keydown", onKeyDown);
 
-  // div.ondragstart = function () {
-  //   return false;
-  // };
+    // drop the div, remove unneeded handlers
+    div.onmouseup = function () {
+      document.removeEventListener("mousemove", onMouseMove);
+      div.onmouseup = null;
+    };
+  };
+
+  div.ondragstart = function () {
+    return false;
+  };
 
   // IMG
   const img = document.createElement("img");

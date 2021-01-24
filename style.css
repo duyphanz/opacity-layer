@@ -22,12 +22,14 @@
   position: absolute;
   left: 0;
   bottom: -35px;
+  z-index: 1001;
 }
 
 .opacity-layer-range-input {
   position: absolute;
   right: 0;
   bottom: -25px;
+  z-index: 1001;
 
   -webkit-appearance: none;
   width: 180px;
