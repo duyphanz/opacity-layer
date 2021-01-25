@@ -26,8 +26,10 @@
     // moves the div at (pageX, pageY) coordinates
     // taking initial shifts into account
     function moveAt(pageX, pageY) {
-      div.style.left = pageX - shiftX + "px";
-      div.style.top = pageY - shiftY + "px";
+      const { scrollX, scrollY } = window;
+
+      div.style.left = pageX - shiftX - scrollX + "px";
+      div.style.top = pageY - shiftY - scrollY + "px";
     }
 
     function onMouseMove(event) {
