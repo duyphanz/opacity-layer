@@ -3,10 +3,16 @@
   const div = document.createElement("div");
   div.setAttribute("class", "opacity-layer");
 
-  div.onmousedown = function (event) {
+  const imgWrapper = document.createElement("div");
+  imgWrapper.setAttribute("class", "opacity-layer-image-wrapper");
+
+  const controlWrapper = document.createElement("div");
+  controlWrapper.setAttribute("class", "opacity-layer-control-wrapper");
+
+  imgWrapper.onmousedown = function (event) {
     if (event.target.nodeName === "INPUT") return;
-    let shiftX = event.clientX - div.getBoundingClientRect().left;
-    let shiftY = event.clientY - div.getBoundingClientRect().top;
+    let shiftX = event.clientX - imgWrapper.getBoundingClientRect().left;
+    let shiftY = event.clientY - imgWrapper.getBoundingClientRect().top;
 
     moveAt(event.pageX, event.pageY);
 
@@ -24,7 +30,7 @@
     function onKeyDown(event) {
       if (event.key === "Escape") {
         document.removeEventListener("mousemove", onMouseMove);
-        div.onmouseup = null;
+        imgWrapper.onmouseup = null;
       }
     }
 
@@ -33,13 +39,13 @@
     document.addEventListener("keydown", onKeyDown);
 
     // drop the div, remove unneeded handlers
-    div.onmouseup = function () {
+    imgWrapper.onmouseup = function () {
       document.removeEventListener("mousemove", onMouseMove);
-      div.onmouseup = null;
+      imgWrapper.onmouseup = null;
     };
   };
 
-  div.ondragstart = function () {
+  imgWrapper.ondragstart = function () {
     return false;
   };
 
@@ -80,8 +86,12 @@
   };
 
   // appendChild
-  div.appendChild(imgInput);
-  div.appendChild(rangeInput);
-  div.appendChild(img);
+  imgWrapper.appendChild(img);
+  div.appendChild(imgWrapper);
+
+  controlWrapper.appendChild(imgInput);
+  controlWrapper.appendChild(rangeInput);
+  div.appendChild(controlWrapper);
+
   document.body.appendChild(div);
 })();
