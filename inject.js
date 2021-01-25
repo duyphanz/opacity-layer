@@ -9,6 +9,13 @@
   const controlWrapper = document.createElement("div");
   controlWrapper.setAttribute("class", "opacity-layer-control-wrapper");
 
+  const closedButton = document.createElement("button");
+  closedButton.innerText = "x";
+  closedButton.setAttribute("class", "opacity-layer-closed-button");
+  closedButton.onclick = () => {
+    div.remove();
+  };
+
   imgWrapper.onmousedown = function (event) {
     if (event.target.nodeName === "INPUT") return;
     let shiftX = event.clientX - imgWrapper.getBoundingClientRect().left;
@@ -90,6 +97,7 @@
   div.appendChild(imgWrapper);
 
   controlWrapper.appendChild(imgInput);
+  controlWrapper.appendChild(closedButton);
   controlWrapper.appendChild(rangeInput);
   div.appendChild(controlWrapper);
 
