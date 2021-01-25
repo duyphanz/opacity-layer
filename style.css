@@ -57,6 +57,28 @@
 }
 
 .opacity-layer-input {
+  outline: 0;
+}
+
+.opacity-layer-input::-webkit-file-upload-button {
+  /* visibility: hidden; */
+  display: none;
+}
+
+.opacity-layer-input:before {
+  content: "+";
+  display: inline-block;
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 0 5px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: none;
+  margin-right: 5px;
+
+  font-size: 20px;
 }
 
 .opacity-layer-range-input {
