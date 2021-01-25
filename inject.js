@@ -78,6 +78,7 @@
   const imgInput = document.createElement("input");
   imgInput.setAttribute("class", "opacity-layer-input");
   imgInput.setAttribute("type", "file");
+  imgInput.accept = "image/*";
   imgInput.onchange = (evt) => {
     var tgt = evt.target || window.event.srcElement,
       files = tgt.files;
