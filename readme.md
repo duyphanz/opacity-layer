@@ -1,6 +1,6 @@
 ## Chrome Extension: Opacity layers
 
-**Status**: init
+**Status**: v1
 
 Add more layers which can be adjust their opacity on your site.
 
